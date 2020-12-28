@@ -17,4 +17,33 @@ CHIP DMux4Way {
 
     PARTS:
     // Put your code here:
+    Nand(a=sel[1], b=sel[1], out=w);
+  	Nand(a=sel[0], b=sel[0], out=z);
+    Xor(a=sel[0], b=sel[1], out=y);
+	  
+  	And (a=w, b=z, out=wz);	
+ 	And(a=in , b=wz, out=a);
+
+	And(a=sel[0], b=sel[1], out=x);
+  	And(a=in , b=x, out=d);
+  
+  	
+  	And(a=z, b=y, out=zy);
+  	And (a=in, b=zy, out=c);
+  	
+  	And(a=w, b=y, out=wy);
+  	And(a=in, b=wy, out=b);
+
+     /*2*/ 
+    // DMux (in=in , sel=sel[1] , a=as , b=bs);
+    // DMux (in=as , sel=sel[0] , a=a , b=b);
+
+    // DMux (in=in , sel=sel[1] , a=ds , b=cs);
+    // DMux (in=bs , sel=sel[0] , a=c , b=d);
+
+    /*3*/
+
+    // DMux (in=in , sel=sel[1] , a=as , b=cs);
+    // DMux (in=as, sel=sel[0], a=a, b=b);
+  	// DMux (in=cs, sel=sel[0], a=c, b=d);
 }
