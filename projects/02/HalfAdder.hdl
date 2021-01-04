@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // This file is part of www.nand2tetris.org
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
@@ -17,3 +18,5 @@ CHIP HalfAdder {
 	Xor (a=a , b=b, out=sum);
 	And (a=a , b=b, out=carry);
 }
+=======
+>>>>>>> abe78ca0a0af055e6b696ac557f8308750431cbf
