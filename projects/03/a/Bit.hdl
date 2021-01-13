@@ -15,10 +15,6 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
-<<<<<<< HEAD
-    Mux(a=in, b=x, sel=load, out=y);
-=======
     Mux(a=x, b=in, sel=load, out=y);
->>>>>>> 3ff0e62 (memory_Units)
     DFF(in=y, out=x, out=out);
 }
