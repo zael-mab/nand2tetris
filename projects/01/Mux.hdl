@@ -15,8 +15,6 @@ CHIP Mux {
 
     PARTS:
     // Put your code here:
-
-
 	Not(in=a, out=nota);
 	Not(in=b, out=notb);
 	Not(in=sel, out=notsel);

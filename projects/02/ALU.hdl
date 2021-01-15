@@ -61,5 +61,5 @@ CHIP ALU {
     Mux16(a=xy, b=rvxy, sel=no, out=o);
     Or16Way(in=o, out=notzr);
     Not(in=notzr, out=zr);
-    Add16Carry(a=o, b[15]=true, out=l, carry=ng);
+    Add16Carry(a=o, b[15]=true, out=drop, carry=ng);
 }

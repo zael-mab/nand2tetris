@@ -22,11 +22,10 @@ CHIP DMux4Way {
     Xor(a=sel[0], b=sel[1], out=y);
 	  
   	And (a=w, b=z, out=wz);	
- 	And(a=in , b=wz, out=a);
+ 	  And(a=in , b=wz, out=a);
 
-	And(a=sel[0], b=sel[1], out=x);
+	  And(a=sel[0], b=sel[1], out=x);
   	And(a=in , b=x, out=d);
-  
   	
   	And(a=z, b=y, out=zy);
   	And (a=in, b=zy, out=c);
