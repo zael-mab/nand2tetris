@@ -17,22 +17,18 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
-    Mux16(a=in, b[0..15]=false, sel=reset, out=ifrst);
-    Mux16(a=ifrst, b=x, sel=inc, out=y);
-    Or(a=load, b=reset, out=lr);
-    Or(a=lr, b=inc, out=lrc);
-    Mux16(a=y, b=in, sel=load, out=l);
+    Mux16(a=in, b[0..15]=false, sel=reset, out=rst);
+    Mux16(a=icrr, b=in, sel=load, out=ld);
+    Mux16(a=rst, b=ld, sel=inc, out=rl);
+    Mux16(a=rl, b=rst, sel=reset, out=str);
 
-    Register(in=l, load=lrc, out=ld, out=out);
-    Inc16(in=ld, out=x);
+    Or(a=load, b=inc, out=li);
+    Or(a=reset, b=li, out=lori);
+    Register(in=str, load=lori, out=y, out=out);
+    // Mux16(a=x, b=str, sel=reset, out=y);
+    Inc16(in=y, out=icrr);
 
-    // Or(a=reset, b=load, out=lr);
-    // Mux(a=load, b=lr, sel=inc, out=cmp);
-
-    // Register(in=y, load=cmp, out=strd, out=out);
-    // Inc16(in=strd, out=x);
-
-    // Mux16(a=strd, b=y, sel=, out=x, out=out);
-
-
+    // Mux16(a=rstr, b=irstr, sel=inc, out=p);
+    // Mux16(a=rstr, b=in, sel=load, out=q);
+    // Mux16(a=rstr, b=x, sel=, out=x, out=out);
 }
