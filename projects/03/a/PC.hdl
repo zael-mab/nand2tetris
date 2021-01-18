@@ -25,10 +25,5 @@ CHIP PC {
     Or(a=load, b=inc, out=li);
     Or(a=reset, b=li, out=lori);
     Register(in=str, load=lori, out=y, out=out);
-    // Mux16(a=x, b=str, sel=reset, out=y);
     Inc16(in=y, out=icrr);
-
-    // Mux16(a=rstr, b=irstr, sel=inc, out=p);
-    // Mux16(a=rstr, b=in, sel=load, out=q);
-    // Mux16(a=rstr, b=x, sel=, out=x, out=out);
 }
