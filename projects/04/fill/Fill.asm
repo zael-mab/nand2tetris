@@ -13,40 +13,67 @@
 
 // Put your code here.
 
-
-
-// 1 . i = 32 * row + col/16 => address
-//      world = Screen[ 32*row + col/16 ]
-//      world = RAM [ 16384 + 32*row + col/16 ]
-// 2 . set the  (col%16)th   bit of word to 0 or 1
-// 3 . Commit word to the RAM
-/////////////////////////////////
-// addr = SCREEN
-// n = RAM[0]
-// i = 0
-
-// LOOP:
-//      if  i > n  goto END
-//      RAM[addr] = -1
-    // advanced to the next row
-//     addr = addr + 32
-//     i = i + 1
-//     goto LOOP
-
-// END:
-//     goto END
-//////////////////////////////////
-
+(LOOP)
 
     @SCREEN
     D=A
-    @addr
-    M=D     //  addr = 16384 (screen's base address)
+    @address        // address = 16384 (screen’s base address)
+    M=D
 
-(LOOP)
-    @KBD
+    @8192           // last address of the Screen memory map
+    D=A
+    @x
+    M=D
+    
+    @i              // i = 0  
+    M=0
+
+    @KBD            // address of the keyboard memory map
     D=M
-    @LOOP
+    @DRAW
     D;JGT
-    @LOOP
+
+(CLEAR)
+
+    @address
+    D=M
+    
+    @i
+    A=D+M
+    M=0             //  Screen[i] = 0  (white pixl)
+    
+    @i
+    M=M+1           //  i += 1
+    
+    @i
+    D=M
+    @x
+    D=D-M           //  if  i < 8192
+    @CLEAR          //  then: goto CLAER
+    D;JLT
+
+    @LOOP           //  else: goto LOOP
+    0;JMP
+
+
+(DRAW)
+
+    @address
+    D=M
+    
+    @i
+    A=D+M
+    M=-1            //  Screen[i] = -1 (1111111111111111 = Black pixl)
+    
+    @i
+    M=M+1           // i += 1
+    
+    @i
+    D=M
+    @x
+    D=D-M           //if  i < 8192
+    @DRAW           //  then: goto DRAW
+    D;JLT
+
+    @LOOP           //  else: goto LOOP
     0;JMP
