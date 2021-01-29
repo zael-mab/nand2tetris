@@ -43,35 +43,10 @@
     @addr
     M=D     //  addr = 16384 (screen's base address)
 
-    @0
-    D=M
-    @n
-    M=D     //  n = Ram[0]
-
-    @i
-    M=0     //  i = 0
-
 (LOOP)
-    @i
+    @KBD
     D=M
-    @n
-    D=D-M
-    @END
-    D;JGT   // (D == 0) if i > n goto END
-
-    @addr
-    A=M
-    M=-1    //   RAM[addr] =1111111111111111
-    
-    @i
-    M=M+1   //  i = i + 1
-    @32
-    D=A
-    @addr
-    M=D+M   //  addr = addr + 32
     @LOOP
-    0;JMP   //  goto LOOP
-
-(END)
-    @END    //  program's end
-    0;JMP   //  infinite loop
+    D;JGT
+    @LOOP
+    0;JMP
