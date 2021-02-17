@@ -25,5 +25,5 @@ CHIP PC {
     Or(a=load, b=inc, out=li);
     Or(a=reset, b=li, out=lori);
     Register(in=str, load=lori, out=y, out=out);
-    Inc16(in=y, out=icrr);
+    Inc16(in=y, out=icrr¡);
 }
