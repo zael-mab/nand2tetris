@@ -1,6 +1,7 @@
-// Mutiplies R0 and R1 and stores the results in R2
-// (R0, R1, R2 refer to RAM[0], RAM[1] and RAM[2], respectively.)
-
+//      while (i < n)
+//          arr[i] = -1
+    
+    
     // arr = 100
     @100
     D=A
