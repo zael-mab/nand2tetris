@@ -17,20 +17,29 @@
     D=M
     @END
     D;JEQ
-    //
+    //check if R0 > R1
     @R0
     D=M-D
-    @SEC
+    @SEC    // if (R0 < R1) goto SEC
     D;JGT
     // initiate x with R0
     @R0
     D=M
     @x
     M=D
+
+    // FLIP R1 AND R0
+    // r0 = r1
     @R1
     D=M
-    @val
+    @R0
     M=D
+    // r1 = x
+    @x
+    D=M
+    @R1
+    M=D
+    
     @LOOP
     0;JMP
 
@@ -40,25 +49,17 @@
     D=M
     @x
     M=D
-    @R0
-    D=M
-    @val
-    M=D
 
 
 // WHILE
 (LOOP)
-    @x      // if x == 0 goto END
-    D=M
-    @END
-    D;JEQ
-    @val
+    @R0
     D=M
     @R2
     M=D+M
     @x
     MD=M-1
-    @LOOP
+    @LOOP       // if x > 0 goto LOOP else goto END
     D;JGT
 
 (END)
