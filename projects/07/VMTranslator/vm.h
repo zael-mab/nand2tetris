@@ -38,7 +38,7 @@
 # define    TEMP    256
 
 
-
+typedef enum {true, false} bool;
 
 
 typedef struct      s_head
@@ -52,6 +52,7 @@ typedef struct      s_node
     int             op;
     int             segment;
     int             index;
+    bool            arith;
     char            *command;
     struct s_node  *next;
 }                   t_node;
@@ -61,6 +62,7 @@ typedef struct      s_vmdata
     int             op;
     int             segment;
     int             index;
+    bool            arith;  
     char            *line;
 }                   t_vmdata;
 

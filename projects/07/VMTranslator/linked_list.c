@@ -19,6 +19,7 @@ void    init_newnode(t_node *newnode, t_vmdata data)
     newnode->segment = data.segment;
     newnode->index = data.index;
     newnode->command = ft_strdup(data.line);
+    newnode->arith = data.arith;
     newnode->next = NULL;
 }
 
@@ -54,9 +55,7 @@ void        printf_list(t_head head)
     tmp = head.first;
     while (jump > 0)
     {
-        // int op;
-        // tmp->command;
-        ft_printf ("---> [%s].. \n", tmp->command);
+        ft_printf ("--->(%d) [%s] op->%d seg->%d ind->%d\n", tmp->arith & 1, tmp->command, tmp->op, tmp->segment, tmp->index);
         tmp = tmp->next;
         jump--;
     }
