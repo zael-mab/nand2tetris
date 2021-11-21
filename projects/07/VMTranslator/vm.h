@@ -66,9 +66,63 @@ typedef struct      s_vmdata
     char            *line;
 }                   t_vmdata;
 
+typedef struct          s_memory_segments
+{
+    unsigned int        sp;
+    unsigned int        local;
+    unsigned int        arg;
+    unsigned int        this;
+    unsigned int        that;
+    
+    // addr base
+    unsigned int        sp_p;
+    unsigned int        local_p;
+    unsigned int        arg_p;
+    unsigned int        this_p;
+    unsigned int        that_p;
+    unsigned int        s_tatic;
+}                       t_memory_segments;
+
+//  sp stored in RAM[0] base addr sp = 256
+//  lcl stored in RAM[1] base addr lcl = 1015
+//  arg stored in RAM[2] base addr arg = 
+//  this stored in RAM[3] base addr arg = 
+//  that stored in RAM[4] base addr arg =
+
+// push segment i
+// pop segment i
+// segment = {local , arg, this , that}
+
+// addr = segmentPointer + i, *sp = *addr, sp++
+// addr = segmentPointer + i, sp--, *addr = *sp
+
+//  push constant i =>  *sp = i, sp++
+//  no pop constant operation
+
+//  static stored RAM[16] => RAM[255]
+// file.vm          
+// pop static 5 ==> @filename.5 , M=D
+// pop static 2 ==> @filename.2 , M=D
+
+//  temp  a fixed 8-place memory segment.
+//  maped on Ram locations 5 to 12
+//  pop tmp i =>  addr = 5 + i, *sp = *addr, sp++
+//  push tmp i => addr = 5 + i, sp--. *addr =*sp
+
+
+//  push pointer 0/1    =>  *sp = this/that, sp++
+//  pop pointer 0/1     =>  sp--, this/that = *sp
+//      pointer 0 accessing this
+//      pointer 1 accessing that
 
 void        add_last(t_head *head, t_vmdata *data);
 void        printf_list(t_head head);
+int         set_op(char *op);
+int         set_segment(char *segment);
+int         check_and_set(char *line, t_vmdata *data);
+void        trans(t_head *head, t_memory_segments *segments);
+// void        init_memory_segment(t_memory_segments *segments);
+
 
 
 #endif

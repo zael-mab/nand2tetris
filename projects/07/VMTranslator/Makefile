@@ -15,6 +15,7 @@ NAME =  VMTranslator
 SRC = 	main.c\
 		linked_list.c\
 		parser.c\
+		trans.c\
 		
 OBJ = $(SRC:.c=.o)
 
