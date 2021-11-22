@@ -18,13 +18,14 @@ void    init_memory_segment(t_memory_segments *segments)
     segments->sp = 0;
     segments->local = 1;
     segments->arg = 2;
-    segments->sp_p = 256;
-    segments->local_p = 300;
-    segments->arg_p = 400;
-    segments->this = 3;
-    segments->this_p = 3000;
+    // segments->sp_p = 256;
+    // segments->local_p = 300;
+    // segments->arg_p = 400;
+    segments->t_his = 3;
+    // segments->this_p = 3000;
     segments->that = 4;
-    segments->that_p = 3010;
+    // segments->that_p = 3010;
+    segments->tmp = 5;              // tmp < 12
 }
 
 void    trans(t_head *head, t_memory_segments *segments)
@@ -42,19 +43,54 @@ void    trans(t_head *head, t_memory_segments *segments)
             {
                 if (inst->segment == CONST)
                 {
-                    ft_printf ("//%s\n@%d\nD=A\n@%d\nA=M\nM=D\n@%d\nM=M+1\n", inst->command, inst->index, segments->sp, segments->sp);
+                    print_code(*inst, segments, 0, 0);
+
+                    // ft_printf ("//%s\n@%d\nD=A\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
+                    //  inst->command, inst->index, segments->sp, segments->sp);
                     // segments->sp
                 }
-                if (inst->segment == ARG)
-                {
-                    ft_printf ("//%s\n@%d\nD=M\n@%d\nAM=M+D\nD=M\n@%d\nA=M\nM=D\n@%d\nM=M+1", inst->command, inst->index, segments->local, segments->sp, segments->sp);
 
+                // ///////
+                if (inst->segment == ARG)
+                    print_code(*inst, segments,segments->arg, 1);
+                if (inst->segment == LCL)
+                    print_code(*inst, segments,segments->local, 1);
+                if (inst->segment == THIS)
+                    print_code(*inst, segments,segments->t_his, 1);
+                if (inst->segment == THAT)
+                    print_code(*inst, segments,segments->that, 1);
+                
+                // 
+
+                // if (inst->segment == PTR)
+                // {
+                //     if (!inst->index)
+                //         print_code(*inst, segments, segments->t_his, 1);
+                //     else
+                //         print_code(*inst, segments, segments->that, 1);
                 }
             }
-            // if (inst->op == POP)
-            // {
+            if (inst->op == POP)
+            {
 
-            // }
+                if (inst->segment == ARG)
+                    print_code(*inst, segments, segments->arg, 2);
+                if (inst->segment == LCL)
+                    print_code(*inst, segments, segments->local, 2);
+                if (inst->segment == THAT)
+                    print_code(*inst, segments, segments->that, 2);
+                if (inst->segment == THIS)
+                    print_code(*inst, segments, segments->t_his, 2);
+
+                // 
+                // if (inst->segment == PTR)
+                // {
+                //     if (!inst->index)
+                //         print_code(*inst, segments, segments->t_his, 2);
+                //     else
+                //         print_code(*inst, segments, segments->that, 2);
+                // }
+            }
         }
         // else
         // {

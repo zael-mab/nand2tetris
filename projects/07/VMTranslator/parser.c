@@ -29,6 +29,8 @@ int     set_segment(char *segment)
         return (STATIC);
     else if (ft_strcmp(segment, "temp") == 0)
         return (TEMP);
+    else if (ft_strcmp(segment, "pointer") == 0)
+        return (PTR);
     else
         return (0);
 }

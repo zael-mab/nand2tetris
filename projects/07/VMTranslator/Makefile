@@ -16,6 +16,7 @@ SRC = 	main.c\
 		linked_list.c\
 		parser.c\
 		trans.c\
+		print_code.c\
 		
 OBJ = $(SRC:.c=.o)
 

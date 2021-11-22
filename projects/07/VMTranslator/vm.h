@@ -71,8 +71,10 @@ typedef struct          s_memory_segments
     unsigned int        sp;
     unsigned int        local;
     unsigned int        arg;
-    unsigned int        this;
+    unsigned int        t_his;
     unsigned int        that;
+    unsigned int        tmp;
+
     
     // addr base
     unsigned int        sp_p;
@@ -88,6 +90,13 @@ typedef struct          s_memory_segments
 //  arg stored in RAM[2] base addr arg = 
 //  this stored in RAM[3] base addr arg = 
 //  that stored in RAM[4] base addr arg =
+
+//
+// set sp 256,        // stack pointer
+// set local 300,     // base address of the local segment
+// set argument 400,  // base address of the argument segment
+// set this 3000,     // base address of the this segment
+// set that 3010,     // base address of the that segment
 
 // push segment i
 // pop segment i
@@ -122,6 +131,7 @@ int         set_segment(char *segment);
 int         check_and_set(char *line, t_vmdata *data);
 void        trans(t_head *head, t_memory_segments *segments);
 // void        init_memory_segment(t_memory_segments *segments);
+void        print_code(t_node inst, t_memory_segments *segments, int x, int sw);
 
 
 
