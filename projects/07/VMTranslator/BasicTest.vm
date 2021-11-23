@@ -1,4 +1,13 @@
 push constant 3030
-pop this 0
+pop pointer 0
 push constant 4030
-pop that 1
+pop this 1
+push constant 2030
+push pointer 1
+push constant 1030
+pop that 3
+push this 3
+push constant 3050
+push pointer 0
+push constant 1080
+pop that 2

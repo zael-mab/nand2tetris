@@ -62,15 +62,15 @@ void    trans(t_head *head, t_memory_segments *segments)
                 
                 // 
 
-                // if (inst->segment == PTR)
-                // {
-                //     if (!inst->index)
-                //         print_code(*inst, segments, segments->t_his, 1);
-                //     else
-                //         print_code(*inst, segments, segments->that, 1);
+                if (inst->segment == PTR)
+                {
+                    if (!inst->index)
+                        print_code(*inst, segments, segments->t_his, 3);
+                    else
+                        print_code(*inst, segments, segments->that, 3);
                 }
             }
-            if (inst->op == POP)
+            else if (inst->op == POP)
             {
 
                 if (inst->segment == ARG)
@@ -83,13 +83,13 @@ void    trans(t_head *head, t_memory_segments *segments)
                     print_code(*inst, segments, segments->t_his, 2);
 
                 // 
-                // if (inst->segment == PTR)
-                // {
-                //     if (!inst->index)
-                //         print_code(*inst, segments, segments->t_his, 2);
-                //     else
-                //         print_code(*inst, segments, segments->that, 2);
-                // }
+                if (inst->segment == PTR)
+                {
+                    if (!inst->index)
+                        print_code(*inst, segments, segments->t_his, 4);
+                    else
+                        print_code(*inst, segments, segments->that, 4);
+                }
             }
         }
         // else

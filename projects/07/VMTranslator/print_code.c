@@ -24,5 +24,10 @@ void    print_code(t_node inst, t_memory_segments *segments, int x, int sw)
     if (sw == 2)
         ft_printf ("//%s\n@%d\nD=A\n@%d\nM=M+D\n@%d\nAM=M-1\nD=M\n@%d\nA=M\nM=D\n@%d\nD=A\n@%d\nM=M-D\n",
             inst.command, inst.index, x, segments->sp, x, inst.index, x);
-
+    if (sw == 3)
+        ft_printf ("//%s\n@%d\nD=M\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
+         inst.command, x, segments->sp, segments->sp);
+    if (sw == 4)
+        ft_printf ("//%s\n@%d\nAM=M-1\nD=M\n@%d\nM=D\n",
+        inst.command, segments->sp, x);
 }
