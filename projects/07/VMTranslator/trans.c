@@ -42,13 +42,7 @@ void    trans(t_head *head, t_memory_segments *segments)
             if (inst->op == PUSH)
             {
                 if (inst->segment == CONST)
-                {
                     print_code(*inst, segments, 0, 0);
-
-                    // ft_printf ("//%s\n@%d\nD=A\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
-                    //  inst->command, inst->index, segments->sp, segments->sp);
-                    // segments->sp
-                }
 
                 // ///////
                 if (inst->segment == ARG)
@@ -61,13 +55,20 @@ void    trans(t_head *head, t_memory_segments *segments)
                     print_code(*inst, segments,segments->that, 1);
                 
                 // 
-
                 if (inst->segment == PTR)
                 {
                     if (!inst->index)
                         print_code(*inst, segments, segments->t_his, 3);
                     else
                         print_code(*inst, segments, segments->that, 3);
+                }
+
+                // 
+                if (inst->segment == TEMP)
+                {
+                    // ft_printf ("//%s\n",
+                    //  inst->command, );
+                    print_code(*inst, segments, segments->tmp + inst->index, 3);
                 }
             }
             else if (inst->op == POP)
@@ -89,6 +90,13 @@ void    trans(t_head *head, t_memory_segments *segments)
                         print_code(*inst, segments, segments->t_his, 4);
                     else
                         print_code(*inst, segments, segments->that, 4);
+                }
+                //
+                if (inst->segment == TEMP)
+                {
+                    // ft_printf ("//%s\n",
+                    //  inst->command, );
+                    print_code(*inst, segments, segments->tmp + inst->index, 4);
                 }
             }
         }
