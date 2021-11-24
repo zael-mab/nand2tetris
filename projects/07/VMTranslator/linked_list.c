@@ -33,6 +33,7 @@ void    add_last(t_head *head, t_vmdata *data)
     if (!head->first)
     {
         head->first = newnode;
+        newnode->pos = 1;
         head->h_size = 1;
     }
     else
@@ -42,6 +43,7 @@ void    add_last(t_head *head, t_vmdata *data)
             tmp = tmp->next;
         tmp->next = newnode;
         head->h_size++;
+        newnode->pos = head->h_size;
     }
 }
 

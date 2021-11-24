@@ -51,6 +51,7 @@ typedef struct      s_head
 typedef struct      s_node
 {
     int             op;
+    int             pos;
     int             segment;
     int             index;
     bool            arith;

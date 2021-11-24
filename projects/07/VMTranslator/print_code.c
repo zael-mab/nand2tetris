@@ -31,8 +31,8 @@ void    print_code(t_node inst, t_memory_segments segments, int x, int sw)
         ft_printf ("//%s\n@%d\nAM=M-1\nD=M\n@%d\nM=D\n",
         inst.command, segments.sp, x);
     if (sw == 5)
-        ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M-D\n@FALSE\nD;%s\n@%d\nA=M\nMD=1\n@GO\n0;JMP\n(FALSE)\n@%d\nA=M\nM=0\n(GO)\n@%d\nM=M+1\n",
-        inst.command, segments.sp, segments.sp, segments.mnemonic, segments.sp, segments.sp, segments.sp);
+        ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M-D\n@FALSE%d\nD;%s\n@%d\nA=M\nMD=1\n@GO\n0;JMP\n(FALSE%d)\n@%d\nA=M\nM=0\n(GO)\n@%d\nM=M+1\n",
+        inst.command, segments.sp, segments.sp, inst.pos,segments.mnemonic, segments.sp, inst.pos,segments.sp, segments.sp);
     if (sw == 6)
         ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=D%cM\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
          inst.command, segments.sp, segments.sp, x,segments.sp, segments.sp);

@@ -5,11 +5,11 @@
 
 // Executes pop and push commands using the virtual memory segments.
 push constant 5
-push constant 5
+push constant 1
 add
-push constant 0
-push constant 9
-or
+push constant 5
+push constant 2
+eq
 push constant 3
 push constant 8
 gt
