@@ -44,6 +44,7 @@ typedef enum {true, false} bool;
 typedef struct      s_head
 {
     int             h_size;
+    char            *file_name;
     struct s_node   *first;
 }                   t_head;
 
@@ -75,14 +76,7 @@ typedef struct          s_memory_segments
     unsigned int        that;
     unsigned int        tmp;
 
-    
-    // addr base
-    unsigned int        sp_p;
-    unsigned int        local_p;
-    unsigned int        arg_p;
-    unsigned int        this_p;
-    unsigned int        that_p;
-    unsigned int        s_tatic;
+    char                *mnemonic;
 }                       t_memory_segments;
 
 //  sp stored in RAM[0] base addr sp = 256
@@ -131,7 +125,7 @@ int         set_segment(char *segment);
 int         check_and_set(char *line, t_vmdata *data);
 void        trans(t_head *head, t_memory_segments *segments);
 // void        init_memory_segment(t_memory_segments *segments);
-void        print_code(t_node inst, t_memory_segments *segments, int x, int sw);
+void        print_code(t_node inst, t_memory_segments segments, int x, int sw);
 
 
 

@@ -13,35 +13,38 @@
 #include "vm.h"
 #include <stdio.h>
 
-//  d = *p
-// @p
-// A=M
-// D=M 
+// add ( x + y) int
+// sub (x - y)  int
+// neg (- y)    int
+// eq  (x == 0) bool
+// gt  (x > y)  bool
+// lt  (x < y)  bool
+// and (x & y)  bool
+// or  (x || y) bool
+// not (not x)  bool
 
-// sp stored in RAM[0]
-// Stack basr addr = 256
-// push x y
-// *sp = y
-// sp++
 
-// @y      // D=y
-// D=A
-// @sp      // *sp = D
-// A=M
-// M=D
-// @sp      // sp++
-// M=M+1
+int        f_name(t_head *vmcode, char *name)
+{
+    int name_len;
+    int jumper;
 
-//  push constant i => *sp = ; sp++
+    name_len = ft_strlen(name);
+    jumper = -1;
+    while (name[++jumper])
+    {
 
-// pop local i
-// addr =  lcl + i; sp--; *addr = *sp
-// push local i
-// addr = lcl +i; *sp = *addr; sp++;
-
-// push segment i
-// pop segment i
-// segment = {local , arg, this , that}
+        if (name[jumper] == '.' && !ft_strcmp(name + jumper + 1, "vm"))
+            break ;
+    }
+    if (jumper == name_len)
+        return (0);
+    else
+    {
+        vmcode->file_name = (ft_strncpy(ft_strnew(jumper), name, jumper));
+        return(1);
+    }
+}
 
 
 int main (int ac, char **av)
@@ -59,9 +62,16 @@ int main (int ac, char **av)
         data = ft_memalloc (sizeof (t_vmdata));
         ft_bzero(data, sizeof(t_vmdata));
 
-        fd = open(av[1], O_RDONLY);
+        if (!f_name(vmcode, av[1]))
+        {
+            ft_printf ("Error file extention...!\n");
+            return (0);
+        }
+
+        ft_printf ("\t\tfile_name=[%s]\n",vmcode->file_name);
 
         int i;
+        fd = open(av[1], O_RDONLY);
         while (get_next_line(fd, &data->line) > 0)
         {
             char *tmp = ft_strtrim(data->line);
