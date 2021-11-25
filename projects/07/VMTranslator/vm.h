@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <fcntl.h>
+# include <stdio.h>
 
 # define    PUSH    1
 # define    POP     2
@@ -78,13 +79,8 @@ typedef struct          s_memory_segments
     unsigned int        tmp;
 
     char                *mnemonic;
+    int                 fd;
 }                       t_memory_segments;
-
-//  sp stored in RAM[0] base addr sp = 256
-//  lcl stored in RAM[1] base addr lcl = 1015
-//  arg stored in RAM[2] base addr arg = 
-//  this stored in RAM[3] base addr arg = 
-//  that stored in RAM[4] base addr arg =
 
 //
 // set sp 256,        // stack pointer
@@ -120,12 +116,10 @@ typedef struct          s_memory_segments
 //      pointer 1 accessing that
 
 void        add_last(t_head *head, t_vmdata *data);
-void        printf_list(t_head head);
 int         set_op(char *op);
 int         set_segment(char *segment);
 int         check_and_set(char *line, t_vmdata *data);
 void        trans(t_head *head, t_memory_segments *segments);
-// void        init_memory_segment(t_memory_segments *segments);
 void        print_code(t_node inst, t_memory_segments segments, int x, int sw);
 
 

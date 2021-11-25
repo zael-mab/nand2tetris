@@ -66,7 +66,7 @@ void    trans(t_head *head, t_memory_segments *segments)
                 // 
                 if (inst->segment == STATIC)
                 {
-                    ft_printf ("//%s\n@%s.%d\nD=M\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
+                    dprintf (segments->fd,"//%s\n@%s.%d\nD=M\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
                         inst->command, head->file_name, inst->index, segments->sp, segments->sp);
                 }
             }
@@ -98,7 +98,7 @@ void    trans(t_head *head, t_memory_segments *segments)
                 // 
                 if (inst->segment == STATIC)
                 {
-                    ft_printf ("//%s\n@%d\nAM=M-1\nD=M\n@%s.%d\nM=D\n",
+                    dprintf (segments->fd, "//%s\n@%d\nAM=M-1\nD=M\n@%s.%d\nM=D\n",
                     inst->command, segments->sp, head->file_name, inst->index);
                 }
             }
@@ -108,17 +108,17 @@ void    trans(t_head *head, t_memory_segments *segments)
         {
             if (inst->op == ADD)
             {
-                ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M+D\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
+                dprintf(segments->fd,"//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M+D\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
                  inst->command, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             if (inst->op == SUB)
             {
-                ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M-D\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
+                dprintf(segments->fd,"//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M-D\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
                  inst->command, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             if (inst->op == NEG)
             {
-                ft_printf("//%s\n@%d\nAM=M-1\nM=-M\n@%d\nM=M+1",
+                dprintf(segments->fd,"//%s\n@%d\nAM=M-1\nM=-M\n@%d\nM=M+1",
                  inst->command, segments->sp, segments->sp);
             }
             // //   ????????
@@ -127,43 +127,33 @@ void    trans(t_head *head, t_memory_segments *segments)
                 segments->mnemonic = ft_strdup("JNE");
                 print_code(*inst, *segments, 0, 5);
                 free(segments->mnemonic);
-                // ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=M-D\n@FALSE\nD;JNE\n@%d\nA=M\nMD=1\n@GO\n0;JMP\n(FALSE)\n@%d\nA=M\nM=0\n(GO)\n@%d\nM=M+1\n",
-                //  inst->command, segments->sp, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             //////
             if (inst->op == GT)
             {
-                segments->mnemonic = ft_strdup("JLT");
+                segments->mnemonic = ft_strdup("JLE");
                 print_code(*inst, *segments, 0, 5);
                 free(segments->mnemonic);
-                // ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=D-M\n@FALSE\nD;JLT\n@%d\nA=M\nM=0\n@GO\n0;JMP\n(FALSE)\n@%d\nA=M\nM=-1\n(GO)\n@%d\nM=M+1\n",
-                //  inst->command, segments->sp, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             if (inst->op == LT)
             {
-                segments->mnemonic = ft_strdup("JGT");
+                segments->mnemonic = ft_strdup("JGE");
                 print_code(*inst, *segments, 0, 5);
                 free(segments->mnemonic);
-                // ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=D-M\n@FALSE\nD;JGT\n@%d\nA=M\nM=0\n@GO\n0;JMP\n(FALSE)\n@%d\nA=M\nM=-1\n(GO)\n@%d\nM=M+1\n",
-                //  inst->command, segments->sp, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             // //
             if (inst->op == AND)
             {
                 print_code(*inst, *segments, '&', 6);
-                // ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=D&M\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
-                //  inst->command, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             if (inst->op == OR)
             {
                 print_code(*inst, *segments, '|', 6);
-                // ft_printf("//%s\n@%d\nAM=M-1\nD=M\n@%d\nAM=M-1\nD=D|M\n@%d\nA=M\nM=D\n@%d\nM=M+1\n",
-                //  inst->command, segments->sp, segments->sp, segments->sp, segments->sp);
             }
             //
             if (inst->op == NOT)
             {
-                ft_printf("//%s\n@%d\nA=M-1\nM=!M\n",
+                dprintf(segments->fd, "//%s\n@%d\nA=M-1\nM=!M\n",
                  inst->command, segments->sp);
             }
 

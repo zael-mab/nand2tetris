@@ -47,19 +47,3 @@ void    add_last(t_head *head, t_vmdata *data)
     }
 }
 
-
-void        printf_list(t_head head)
-{
-    t_node *tmp;
-    int     jump;
-
-    jump = head.h_size;
-    tmp = head.first;
-    while (jump > 0)
-    {
-        ft_printf ("--->(%d) [%s] op->%d seg->%d ind->%d\n", tmp->arith & 1, tmp->command, tmp->op, tmp->segment, tmp->index);
-        tmp = tmp->next;
-        jump--;
-    }
-
-}

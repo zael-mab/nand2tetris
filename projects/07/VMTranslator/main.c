@@ -11,17 +11,7 @@
 /* ************************************************************************** */
 
 #include "vm.h"
-#include <stdio.h>
 
-// add ( x + y) int
-// sub (x - y)  int
-// neg (- y)    int
-// eq  (x == 0) bool
-// gt  (x > y)  bool
-// lt  (x < y)  bool
-// and (x & y)  bool
-// or  (x || y) bool
-// not (not x)  bool
 
 
 int        f_name(t_head *vmcode, char *name)
@@ -68,8 +58,6 @@ int main (int ac, char **av)
             return (0);
         }
 
-        ft_printf ("\t\tfile_name=[%s]\n",vmcode->file_name);
-
         int i;
         fd = open(av[1], O_RDONLY);
         while (get_next_line(fd, &data->line) > 0)
@@ -84,22 +72,28 @@ int main (int ac, char **av)
                     add_last(vmcode, data);
                 if (i == 0)
                 {
-                    ft_printf ("Unknown command in the line [%s] [%d] \n", data->line, i);
                     free(data->line);
                     return (0);
                 }
-                if (i == -1)
-                    ft_printf ("%s.\n", data->line);
+                // if (i == -1)
+                    // ft_printf ("%s.\n", data->line);
             }
             free(data->line);
             ft_bzero(data, sizeof(t_vmdata));
         }
-        printf_list(*vmcode);
+        close(fd);
         
         t_memory_segments *segments;
         segments = ft_memalloc(sizeof(t_memory_segments));
         ft_bzero(segments, sizeof(t_memory_segments));
+
+
+        vmcode->file_name = ft_strjoin(vmcode->file_name, ".asm");
+        segments->fd =  open (vmcode->file_name,O_CREAT | O_RDWR | O_TRUNC, 0600);
+
         trans(vmcode, segments);
+        ft_printf ("file [%s] created\n", vmcode->file_name);
+        close(segments->fd);
         
     }
     else

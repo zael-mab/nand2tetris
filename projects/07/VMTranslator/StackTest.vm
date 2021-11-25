@@ -23,14 +23,14 @@ lt
 push constant 891
 push constant 891
 lt
-push constant 326
-push constant 327
+push constant 32767
+push constant 32766
 gt
-push constant 327
-push constant 323
+push constant 32766
+push constant 32767
 gt
-push constant 327
-push constant 327
+push constant 32766
+push constant 32766
 gt
 push constant 57
 push constant 31

@@ -26,22 +26,22 @@ M=M+1
 @0
 AM=M-1
 D=M
-@StaticTest.8
+@StaticTest.asm.8
 M=D
 //pop static 3
 @0
 AM=M-1
 D=M
-@StaticTest.3
+@StaticTest.asm.3
 M=D
 //pop static 1
 @0
 AM=M-1
 D=M
-@StaticTest.1
+@StaticTest.asm.1
 M=D
 //push static 3
-@StaticTest.3
+@StaticTest.asm.3
 D=M
 @0
 A=M
@@ -49,7 +49,7 @@ M=D
 @0
 M=M+1
 //push static 1
-@StaticTest.1
+@StaticTest.asm.1
 D=M
 @0
 A=M
@@ -69,7 +69,7 @@ M=D
 @0
 M=M+1
 //push static 8
-@StaticTest.8
+@StaticTest.asm.8
 D=M
 @0
 A=M
