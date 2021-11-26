@@ -9,3 +9,6 @@
 # 4_    Machine language.
 # 5_    Computer architectur.
 # 6_    Assembler.
+# _Second part =>
+# 7		VM1: Stack Arithmetic.
+# 8		VM2: Program control.
