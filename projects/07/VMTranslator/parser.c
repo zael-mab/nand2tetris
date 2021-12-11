@@ -56,15 +56,46 @@ int     set_op(char *op)
         return (OR);
     else if (ft_strcmp(op, "not") == 0)
         return (NOT);
+    else if (ft_strcmp(op, "label") == 0)
+        return (LBL);
+    else if (ft_strcmp(op, "if-goto") == 0)
+        return (IFGOTO);
+    else if (ft_strcmp(op, "goto") == 0)
+        return (GOTO);
     else
         return (0);
 }
 
 
+int     ft_isup(char *line)
+{
+    int i;
+
+    i = -1;
+    while (line[++i])
+    {
+        if (ft_isalpha(line[i]) != 1 || !ft_isdigit(line[i]))
+            return (0);
+    }
+    return (1);
+}
+
+
 int     check_and_set(char *line, t_vmdata *data)
 {
-    char **tab;
 
+    int i = -1;
+
+    while (line[++i])
+        if (line[i] == '/' && line[i + 1] == '/')
+            break;
+    if (ft_strlen(line) > i)
+    {
+        char *tmp = ft_strncpy(ft_strnew(i),line, i);
+        line = tmp;
+    }
+
+    char **tab;
     tab = ft_strsplit(line, ' ');
 
     if ((tab[0][0] == '/' && tab[0][1] == '/' ) || ft_strlen(tab[0]) < 2)
@@ -74,7 +105,14 @@ int     check_and_set(char *line, t_vmdata *data)
 
         data->op = set_op((tab[0]));
         if (data->op > 0)
+        {
             data->arith = 1;
+            if (tab[1] && ft_isup(tab[1]))
+            {
+                data->label = ft_strdup(tab[1]);
+                ft_printf ("\t\tdata->label:    |%s\n", data->label);
+            }
+        }
 
         if (!data->op)
         {
@@ -106,7 +144,8 @@ int     check_and_set(char *line, t_vmdata *data)
                 ft_printf ("|+++++[%s] |op problem at line|\n", line);
             return (0);
         }
-
+        // if (tab[2])
+        ft_printf ("line:[%s] op:[%d]\n", line, data->op);
     }
     ft_memdel((void **)tab);
     return (1);

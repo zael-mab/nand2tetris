@@ -20,6 +20,7 @@ void    init_newnode(t_node *newnode, t_vmdata data)
     newnode->index = data.index;
     newnode->command = ft_strdup(data.line);
     newnode->arith = data.arith;
+    newnode->label = NULL;
     newnode->next = NULL;
 }
 
@@ -30,6 +31,8 @@ void    add_last(t_head *head, t_vmdata *data)
 
     newnode = ft_memalloc(sizeof(t_node));
     init_newnode(newnode, *data);
+    if (data->label)
+        newnode->label = ft_strdup(data->label);
     if (!head->first)
     {
         head->first = newnode;

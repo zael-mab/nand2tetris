@@ -29,6 +29,12 @@
 # define    OR      1024
 # define    NOT     2048
 
+# define    LBL     7
+# define    IFGOTO  77
+# define    GOTO    777
+
+
+
 # define    LCL     1
 # define    ARG     2
 # define    THIS    4
@@ -57,6 +63,7 @@ typedef struct      s_node
     int             index;
     bool            arith;
     char            *command;
+    char            *label;
     struct s_node  *next;
 }                   t_node;
 
@@ -66,6 +73,7 @@ typedef struct      s_vmdata
     int             segment;
     int             index;
     bool            arith;  
+    char            *label;
     char            *line;
 }                   t_vmdata;
 

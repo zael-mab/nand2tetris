@@ -72,6 +72,7 @@ int main (int ac, char **av)
                     add_last(vmcode, data);
                 if (i == 0)
                 {
+                    ft_printf ("%s.\n", data->line);
                     free(data->line);
                     return (0);
                 }
@@ -83,11 +84,12 @@ int main (int ac, char **av)
         }
         close(fd);
         
+        // 
         t_memory_segments *segments;
         segments = ft_memalloc(sizeof(t_memory_segments));
         ft_bzero(segments, sizeof(t_memory_segments));
 
-
+        
         vmcode->file_name = ft_strjoin(vmcode->file_name, ".asm");
         segments->fd =  open (vmcode->file_name,O_CREAT | O_RDWR | O_TRUNC, 0600);
 

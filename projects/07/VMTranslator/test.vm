@@ -1,5 +1,5 @@
 
-push constant 10
+push constant 10// afas af f
 pop local 0
 push constant 21
 push constant 22
