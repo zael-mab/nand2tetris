@@ -1,4 +1,4 @@
-## NAND2Tetris Project
+# NAND2Tetris Project
  This repository contains my implementation of the NAND2Tetris course projects.
  
  NAND2Tetris or The Elements of Computing Systems, is a twelve-part course in fundamental computer engineering that I work through the creation of a
